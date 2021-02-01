@@ -1,0 +1,17 @@
+# A basic demo of passing a parameter to an Azure DevOps pipeline
+parameters:
+- name: appname
+  displayName: Application name
+  type: string
+  default: 'hmmm'
+
+# The use case for this was triggering a pipeline job from something like ServiceNow so displayed any triggers
+trigger:
+- none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo "Setting up ${{ parameters.appname }}"
+  displayName: 'Confirm app name'
