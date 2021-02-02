@@ -5,7 +5,7 @@ parameters:
   type: string
   default: 'hmmm'
 
-# The use case for this was triggering a pipeline job from something like ServiceNow so displayed any triggers
+# The use case for this was triggering a pipeline job from something like ServiceNow so disabling any triggers
 trigger:
 - none
 
