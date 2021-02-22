@@ -1,4 +1,4 @@
-# A basic demo of passing a parameter to an Azure DevOps pipeline
+# A basic demo of passing a parameter to an Azure DevOps pipeline and using python and jinja2 templating
 parameters:
 - name: appname
   displayName: Application name
@@ -15,3 +15,17 @@ pool:
 steps:
 - script: echo "Setting up ${{ parameters.appname }}"
   displayName: 'Confirm app name is ok'
+
+- task: UsePythonVersion@0
+  displayName: 'Get python'
+  inputs:
+    versionSpec: '3.6'
+    addToPath: true
+    architecture: 'x64'
+  name: pyTools
+
+- script: python -m pip install --upgrade pip jinja2 cerberus pyaml
+  displayName: 'Install python modules'
+
+- script: python build.py ${{ parameters.appname }}
+  displayName: 'Run python script'
